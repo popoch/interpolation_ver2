@@ -143,13 +143,63 @@ public class Interpolate {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				try {
+					int flag1 = 0;
+					int flag2 = 0;
+					JFileChooser JFC = new JFileChooser("/Users/Administrator/Desktop");
+					JFC.setSelectedFile(new File("IMG_" + Data.location[5]));
+					int interval = JFC.showSaveDialog(null);
+					if (interval == JFileChooser.APPROVE_OPTION) {
+						FileWriter fw = new FileWriter(JFC.getSelectedFile() + ".csv");
+						if(Integer.valueOf(Window_Size_TextField.getText()) == 0) {
+							for(int count = 0; count <= Data.pupildata.size(); count++) {
+								if(count == 0) {
+									fw.write("Gaze Data X" + ","
+											+ "Gaze Data Y" + ","
+											+ "Timestamp" + "\n");
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_first_image_start_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "first image start" + "\n");
+									flag1 = 1;
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_first_image_end_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "first image end" + "\n");
+									flag1--;
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_start_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "second image start" + "\n");
+									flag2 = 1;
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_end_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "second image end" + "\n");
+									flag2--;
+								} else if(flag1 == 1 || flag2 == 1){
+										fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+												+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+												+ String.valueOf(Data.pupildata.get(count-1).timestamp) + "\n");
+								}
+							}
+						}
+						fw.close();
+					}
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}			
 		});
 		
 		method3.setBounds(345, 95, 150, 25);
 		frame.getContentPane().add(method3);
-//----------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------//	
 //		JButton method2 = new JButton("Interpolate  >  Window Size  >  Normalize");
 //		method2.addActionListener(new ActionListener() {
 //			
@@ -1248,4 +1298,6 @@ public class Interpolate {
 
 		}
 	}
+
+
 }
