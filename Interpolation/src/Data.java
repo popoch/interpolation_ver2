@@ -18,11 +18,12 @@ public class Data {
 	public static ArrayList<PointR> inter_calcul_R = new ArrayList<PointR>();
 	public static ArrayList<Pupil> original_for_write = new ArrayList<Pupil>();
 	public static ArrayList<Npupil> normal_inter_data_for_write = new ArrayList<Npupil>();
+	public static ArrayList<String> log_timestamp = new ArrayList<String>();
+	public static ArrayList<String> log_image_time = new ArrayList<String>();
 	
 	public static String file_name;
 	public static int left_loss;
 	public static int right_loss;
-	public static String log_timestamp;
 	
 	public static float left_data_loss_rate_during_video_play;
 	public static float right_data_loss_rate_during_video_play;
@@ -51,6 +52,10 @@ public class Data {
 	public static String log_video_recording_stop_time;
 	public static String ac_log_video_recording_start_time;
 	public static String ac_log_video_recording_stop_time;
+	public static String log_first_image_start_time;
+	public static String log_first_image_end_time;
+	public static String log_second_image_start_time;
+	public static String log_second_image_end_time;
 	
 	public static int currentPoint2 = 0;
 	

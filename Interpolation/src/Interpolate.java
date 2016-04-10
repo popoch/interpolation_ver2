@@ -138,20 +138,17 @@ public class Interpolate {
 		frame.getContentPane().add(Window_Size_TextField);
 		Window_Size_TextField.setColumns(10);
 //----------------------------------------------------------------------------------------//	
-//		JButton method3 = new JButton("Interpolate  >  Normalize  >  Window Size");
-//		method3.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				interpolate();
-//				normalize();
-//				windowflag = 3;
-//				windowsize();
-//			}			
-//		});
-//		
-//		method3.setBounds(15, 215, 315, 25);
-//		frame.getContentPane().add(method3);
+		JButton method3 = new JButton("Write_Pic_Gaze");
+		method3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}			
+		});
+		
+		method3.setBounds(345, 95, 150, 25);
+		frame.getContentPane().add(method3);
 //----------------------------------------------------------------------------------------//
 //		JButton method2 = new JButton("Interpolate  >  Window Size  >  Normalize");
 //		method2.addActionListener(new ActionListener() {
@@ -211,6 +208,10 @@ public class Interpolate {
 				int dif_min2 = 50;
 				int dif_min3 = 50;
 				int dif_min4 = 50;
+				int dif_min5 = 50;
+				int dif_min6 = 50;
+				int dif_min7 = 50;
+				int dif_min8 = 50;
 				
 				//get exact time of start/end point of video
 				for(int count = 0; count < Data.pupildata.size(); count++) {
@@ -218,13 +219,23 @@ public class Interpolate {
 					String tmp3 = String.valueOf(Data.log_video_time.get(1));
 					String tmp4 = String.valueOf(Data.log_video_recording_start_time);
 					String tmp5 = String.valueOf(Data.log_video_recording_stop_time);
-					String tmp2 = Data.log_timestamp;
+					String tmp2 = String.valueOf(Data.log_timestamp.get(1));
 					String[] temps4 = tmp1.split(" ", -1);
 					String[] dtime = temps4[1].split(":|\\.", -1);
 					String[] temps5 = tmp2.split(":", -1);
 					String[] log_video_end = tmp3.split(":", -1);
 					String[] log_video_rec_start = tmp4.split(":", -1);
 					String[] log_video_rec_stop = tmp5.split(":", -1);
+					//image start, end time
+					String tmp6 = String.valueOf(Data.log_image_time.get(0));
+					String[] temps6 = tmp6.split(":", -1);
+					String tmp7 = String.valueOf(Data.log_timestamp.get(0));
+					String[] temps7 = tmp7.split(":", -1);
+					String tmp8 = String.valueOf(Data.log_image_time.get(1));
+					String[] temps8 = tmp8.split(":", -1);
+					String tmp9 = String.valueOf(Data.log_image_time.get(2));
+					String[] temps9 = tmp9.split(":", -1);
+					
 					
 					//save original time stamp
 					if(count == 0) {
@@ -267,6 +278,30 @@ public class Interpolate {
 						if(result4 <= dif_min4) {
 							dif_min4 = result4;
 							Data.ac_log_video_recording_stop_time = Data.pupildata.get(count).timestamp;
+						}
+					} else if(dtime[0].equals(temps6[0]) == true && dtime[1].equals(temps6[1]) == true && dtime[2].equals(temps6[2]) == true) {
+						int result5 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps6[3]));
+						if(result5 <= dif_min5) {
+							dif_min5 = result5;
+							Data.log_first_image_start_time = Data.pupildata.get(count).timestamp;
+						}
+					} else if(dtime[0].equals(temps7[0]) == true && dtime[1].equals(temps7[1]) == true && dtime[2].equals(temps7[2]) == true) {
+						int result6 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps7[3]));
+						if(result6 <= dif_min6) {
+							dif_min6 = result6;
+							Data.log_first_image_end_time = Data.pupildata.get(count).timestamp;
+						}
+					} else if(dtime[0].equals(temps8[0]) == true && dtime[1].equals(temps8[1]) == true && dtime[2].equals(temps8[2]) == true) {
+						int result7 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps8[3]));
+						if(result7 <= dif_min7) {
+							dif_min7 = result7;
+							Data.log_second_image_start_time = Data.pupildata.get(count).timestamp;
+						}
+					} else if(dtime[0].equals(temps9[0]) == true && dtime[1].equals(temps9[1]) == true && dtime[2].equals(temps9[2]) == true) {
+						int result8 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps9[3]));
+						if(result8 <= dif_min8) {
+							dif_min8 = result8;
+							Data.log_second_image_end_time = Data.pupildata.get(count).timestamp;
 						}
 					}
 				}
@@ -370,6 +405,34 @@ public class Interpolate {
 											+ String.valueOf(Data.pupildata.get(count-1).right) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
 											+ "video end" + "," + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).right) + "\n");
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_first_image_start_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).right) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "first image start" + "," + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).right) + "\n");
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_first_image_end_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).right) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "first image end" + "," + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).right) + "\n");
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_start_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).right) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "second image start" + "," + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.nor_pupildata.get(count-1).right) + "\n");
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_end_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).left) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).right) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
+											+ "second image end" + "," + ","
 											+ String.valueOf(Data.nor_pupildata.get(count-1).left) + ","
 											+ String.valueOf(Data.nor_pupildata.get(count-1).right) + "\n");
 								} else {
@@ -684,13 +747,15 @@ public class Interpolate {
 	}
 //----------------------------------------------------------------------------------------//	
 	private void analyze2(File inputFile2) {
-		String log_timestamp = null;
 		String log_video_recording_start = null;
 		String log_video_recording_stop = null;
 		//analyze log data
 		try {
 			Data.log_original.clear();
 			Data.log_video_time.clear();
+			Data.log_image_time.clear();
+			Data.log_video_recording_start_time = null;
+			Data.log_video_recording_stop_time = null;
 			
 			Data.log_original = (ArrayList<String>) Files.readAllLines(inputFile2.toPath(), Charset.forName("UTF-8"));
 			
@@ -700,11 +765,15 @@ public class Interpolate {
 				try {
 					if(temps2[2].contains("Video Showing") == true) {
 						String[] temps3 = temps2[0].split("-", -1);
-						log_timestamp = (Integer.valueOf(temps3[3])+12) +":"+ temps3[4] +":"+ temps3[5] +":"+ temps3[6]; 
+						Data.log_timestamp.add((Integer.valueOf(temps3[3])+12) +":"+ temps3[4] +":"+ temps3[5] +":"+ temps3[6]); 
 					}
 					if(temps2[2].contains("Introduction Showing") == true) {
 						String[] temps4 = temps2[0].split("-", -1);
 						Data.log_video_time.add((Integer.valueOf(temps4[3])+12) +":"+ temps4[4] +":"+ temps4[5] +":"+ temps4[6]);
+					}
+					if(temps2[2].contains("Image Showing") == true) {
+						String[] temps7 = temps2[0].split("-", -1);
+						Data.log_image_time.add((Integer.valueOf(temps7[3])+12) +":"+ temps7[4] +":"+ temps7[5] +":"+ temps7[6]);
 					}
 					
 					String[] temp_split = temps2[2].split(" ", -1);
@@ -723,7 +792,7 @@ public class Interpolate {
 					e.printStackTrace();
 				}
 			}
-			Data.log_timestamp = log_timestamp;
+			
 			JOptionPane.showMessageDialog(frame, "Log Data Importing Complete");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1032,7 +1101,7 @@ public class Interpolate {
 			String tmp3 = String.valueOf(Data.log_video_time.get(1));
 			String tmp4 = String.valueOf(Data.log_video_recording_start_time);
 			String tmp5 = String.valueOf(Data.log_video_recording_stop_time);
-			String tmp2 = Data.log_timestamp;
+			String tmp2 = String.valueOf(Data.log_timestamp.get(1));
 			String[] temps4 = tmp1.split(" ", -1);
 			String[] dtime = temps4[1].split(":|\\.", -1);
 			String[] temps5 = tmp2.split(":", -1);
