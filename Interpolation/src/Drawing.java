@@ -148,10 +148,11 @@ public class Drawing extends JFrame {
 					g.drawString("Video recording start time", x4+5, this.getHeight()/4*2-20);
 					g.drawString(caltime1, x4+5, this.getHeight()/4*2);
 					g.drawLine(x4, 0, x4, this.getHeight());
-					g.drawLine(0, this.getHeight()/4*3-280, this.getWidth(), this.getHeight()/4*3-280);
+					//g.drawLine(0, this.getHeight()/4*3-280, this.getWidth(), this.getHeight()/4*3-280);
 				}
+				
 				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.ac_log_video_recording_stop_time)) {
-					String caltime4 = null;
+					String caltime2 = null;
 					String[] temp_real1 = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
 					String[] starttime = temp_real1[1].split("\\.", -1);
 					String time1 = starttime[0];
@@ -181,75 +182,24 @@ public class Drawing extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					caltime4 = String.valueOf(difh + ":" + difm + ":" + difs);
+					caltime2 = String.valueOf(difh + ":" + difm + ":" + difs);
 					
 					g.drawString(Data.ac_log_video_recording_stop_time, x4-180, this.getHeight()/4*2-40);
 					g.drawString("Video recording end time", x4-180, this.getHeight()/4*2-20);
-					g.drawString(caltime4, x4-180, this.getHeight()/4*2);
+					g.drawString(caltime2, x4-180, this.getHeight()/4*2);
 					g.drawLine(x4, 0, x4, this.getHeight());
 				}
 				
-				
-				g.setColor(Color.RED);
-				if(count == 1) {
-					g.drawString("Mean of Right Pupil : "+ String.valueOf(Data.pupil_mean_right), 25, this.getHeight()/4*3-240);
-					g.drawString("Mean of Normalized Right Pupil : "+ String.valueOf(Data.right_nor_data_mean), 25, this.getHeight()/4*3-220);
-					g.drawString("Right Data Loss Rate (Overall) : "+ String.valueOf(Data.right_loss_rate) + "%", 25, this.getHeight()/4*3-200);
-					g.drawString("Right Data Loss Rate (Video) : "+ String.valueOf(Data.right_data_loss_rate_during_video_play) + "%", 25, this.getHeight()/4*3-180);
-				}
-				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_video_time_start)) {
-					
-					String caltime2 = null;
-					String[] temp_real = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
-					String[] starttime = temp_real[1].split("\\.", -1);
-					String time1 = starttime[0];
-					String[] temp_real2 = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(" ", -1);
-					String[] tmptime = temp_real2[1].split("\\.", -1);
-					String time2 = tmptime[0];
-					int difh = 0;
-					int difm = 0;
-					int difs = 0;
-					
-					SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-					Date date1;
-					Date date2;
-					try {
-						date1 = format.parse(time1);
-						date2 = format.parse(time2);
-						long difference = date2.getTime() - date1.getTime(); 
-
-						long diffSeconds = difference / 1000 % 60;
-						long diffMinutes = difference / (60 * 1000) % 60;
-						long diffHours = difference / (60 * 60 * 1000) % 24;
-
-						difh = (int)diffHours;
-						difm = (int)diffMinutes;
-						difs = (int)diffSeconds;
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					caltime2 = String.valueOf(difh + ":" + difm + ":" + difs);
-					
-					g.drawLine(x4, 0, x4, this.getHeight());
-					g.drawString("Video Start", x4+5, this.getHeight()/4-140);
-					g.drawString(caltime2, x4+5, this.getHeight()/4*2);
-					String time_temp[] = Data.nor_pupildata.get(count).timestamp.split(":|\\.", -1);
-					String time_text_start = String.valueOf(time_temp[1])+"min "+String.valueOf(time_temp[2])+"sec "+String.valueOf(time_temp[3]);
-					g.drawString(time_text_start, x4+5, this.getHeight()/4-120);
-					flag = 1;
-					
-					Data.time_check = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(":|\\.", -1);
-					
-				}
-				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_video_time_end)) {
-					
+				g.setColor(Color.ORANGE);
+				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_first_image_start_time)) {
 					String caltime3 = null;
 					String[] temp_real = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
 					String[] starttime = temp_real[1].split("\\.", -1);
 					String time1 = starttime[0];
 					String[] temp_real2 = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(" ", -1);
 					String[] tmptime = temp_real2[1].split("\\.", -1);
+					String[] starttimetmp = String.valueOf(Data.log_first_image_start_time).split(" ", -1);
+					String starttime2 = starttimetmp[1];
 					String time2 = tmptime[0];
 					int difh = 0;
 					int difm = 0;
@@ -276,9 +226,221 @@ public class Drawing extends JFrame {
 					}
 					caltime3 = String.valueOf(difh + ":" + difm + ":" + difs);
 					
+					g.drawString(starttime2, x4+5, this.getHeight()/4*2-110);
+					g.drawString("1st image start time", x4+5, this.getHeight()/4*2-90);
+					g.drawString(caltime3, x4+5, this.getHeight()/4*2-70);
+					g.drawLine(x4, 0, x4, this.getHeight());
+				}
+				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_first_image_end_time)) {
+					String caltime4 = null;
+					String[] temp_real = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
+					String[] starttime = temp_real[1].split("\\.", -1);
+					String time1 = starttime[0];
+					String[] temp_real2 = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(" ", -1);
+					String[] tmptime = temp_real2[1].split("\\.", -1);
+					String[] endtimetmp = String.valueOf(Data.log_first_image_end_time).split(" ", -1);
+					String endtime = endtimetmp[1];
+					String time2 = tmptime[0];
+					int difh = 0;
+					int difm = 0;
+					int difs = 0;
+					
+					SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+					Date date1;
+					Date date2;
+					try {
+						date1 = format.parse(time1);
+						date2 = format.parse(time2);
+						long difference = date2.getTime() - date1.getTime(); 
+
+						long diffSeconds = difference / 1000 % 60;
+						long diffMinutes = difference / (60 * 1000) % 60;
+						long diffHours = difference / (60 * 60 * 1000) % 24;
+
+						difh = (int)diffHours;
+						difm = (int)diffMinutes;
+						difs = (int)diffSeconds;
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					caltime4 = String.valueOf(difh + ":" + difm + ":" + difs);
+					
+					g.drawString(endtime, x4+5, this.getHeight()/4*2-110);
+					g.drawString("1st image end time", x4+5, this.getHeight()/4*2-90);
+					g.drawString(caltime4, x4+5, this.getHeight()/4*2-70);
+					g.drawLine(x4, 0, x4, this.getHeight());
+				}
+				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_second_image_start_time)) {
+					String caltime5 = null;
+					String[] temp_real = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
+					String[] starttime = temp_real[1].split("\\.", -1);
+					String time1 = starttime[0];
+					String[] temp_real2 = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(" ", -1);
+					String[] tmptime = temp_real2[1].split("\\.", -1);
+					String[] endtimetmp = String.valueOf(Data.log_second_image_start_time).split(" ", -1);
+					String endtime = endtimetmp[1];
+					String time2 = tmptime[0];
+					int difh = 0;
+					int difm = 0;
+					int difs = 0;
+					
+					SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+					Date date1;
+					Date date2;
+					try {
+						date1 = format.parse(time1);
+						date2 = format.parse(time2);
+						long difference = date2.getTime() - date1.getTime(); 
+
+						long diffSeconds = difference / 1000 % 60;
+						long diffMinutes = difference / (60 * 1000) % 60;
+						long diffHours = difference / (60 * 60 * 1000) % 24;
+
+						difh = (int)diffHours;
+						difm = (int)diffMinutes;
+						difs = (int)diffSeconds;
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					caltime5 = String.valueOf(difh + ":" + difm + ":" + difs);
+					
+					g.drawString(endtime, x4+5, this.getHeight()/4*2-110);
+					g.drawString("2nd image end time", x4+5, this.getHeight()/4*2-90);
+					g.drawString(caltime5, x4+5, this.getHeight()/4*2-70);
+					g.drawLine(x4, 0, x4, this.getHeight());
+				}
+				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_second_image_end_time)) {
+					String caltime6 = null;
+					String[] temp_real = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
+					String[] starttime = temp_real[1].split("\\.", -1);
+					String time1 = starttime[0];
+					String[] temp_real2 = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(" ", -1);
+					String[] tmptime = temp_real2[1].split("\\.", -1);
+					String[] endtimetmp = String.valueOf(Data.log_second_image_end_time).split(" ", -1);
+					String endtime = endtimetmp[1];
+					String time2 = tmptime[0];
+					int difh = 0;
+					int difm = 0;
+					int difs = 0;
+					
+					SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+					Date date1;
+					Date date2;
+					try {
+						date1 = format.parse(time1);
+						date2 = format.parse(time2);
+						long difference = date2.getTime() - date1.getTime(); 
+
+						long diffSeconds = difference / 1000 % 60;
+						long diffMinutes = difference / (60 * 1000) % 60;
+						long diffHours = difference / (60 * 60 * 1000) % 24;
+
+						difh = (int)diffHours;
+						difm = (int)diffMinutes;
+						difs = (int)diffSeconds;
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					caltime6 = String.valueOf(difh + ":" + difm + ":" + difs);
+					
+					g.drawString(endtime, x4+5, this.getHeight()/4*2-110);
+					g.drawString("2nd image end time", x4+5, this.getHeight()/4*2-90);
+					g.drawString(caltime6, x4+5, this.getHeight()/4*2-70);
+					g.drawLine(x4, 0, x4, this.getHeight());
+				}
+				
+				g.setColor(Color.RED);
+				if(count == 1) {
+					g.drawString("Mean of Right Pupil : "+ String.valueOf(Data.pupil_mean_right), 25, this.getHeight()/4*3-240);
+					g.drawString("Mean of Normalized Right Pupil : "+ String.valueOf(Data.right_nor_data_mean), 25, this.getHeight()/4*3-220);
+					g.drawString("Right Data Loss Rate (Overall) : "+ String.valueOf(Data.right_loss_rate) + "%", 25, this.getHeight()/4*3-200);
+					g.drawString("Right Data Loss Rate (Video) : "+ String.valueOf(Data.right_data_loss_rate_during_video_play) + "%", 25, this.getHeight()/4*3-180);
+				}
+				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_video_time_start)) {
+					
+					String caltime7 = null;
+					String[] temp_real = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
+					String[] starttime = temp_real[1].split("\\.", -1);
+					String time1 = starttime[0];
+					String[] temp_real2 = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(" ", -1);
+					String[] tmptime = temp_real2[1].split("\\.", -1);
+					String time2 = tmptime[0];
+					int difh = 0;
+					int difm = 0;
+					int difs = 0;
+					
+					SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+					Date date1;
+					Date date2;
+					try {
+						date1 = format.parse(time1);
+						date2 = format.parse(time2);
+						long difference = date2.getTime() - date1.getTime(); 
+
+						long diffSeconds = difference / 1000 % 60;
+						long diffMinutes = difference / (60 * 1000) % 60;
+						long diffHours = difference / (60 * 60 * 1000) % 24;
+
+						difh = (int)diffHours;
+						difm = (int)diffMinutes;
+						difs = (int)diffSeconds;
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					caltime7 = String.valueOf(difh + ":" + difm + ":" + difs);
+					
+					g.drawLine(x4, 0, x4, this.getHeight());
+					g.drawString("Video Start", x4+5, this.getHeight()/4-140);
+					g.drawString(caltime7, x4+5, this.getHeight()/4*2);
+					String time_temp[] = Data.nor_pupildata.get(count).timestamp.split(":|\\.", -1);
+					String time_text_start = String.valueOf(time_temp[1])+"min "+String.valueOf(time_temp[2])+"sec "+String.valueOf(time_temp[3]);
+					g.drawString(time_text_start, x4+5, this.getHeight()/4-120);
+					flag = 1;
+					
+					Data.time_check = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(":|\\.", -1);
+					
+				}
+				if(Data.nor_pupildata.get(count).timestamp.equalsIgnoreCase(Data.log_video_time_end)) {
+					
+					String caltime8 = null;
+					String[] temp_real = String.valueOf(Data.ac_log_video_recording_start_time).split(" ", -1);
+					String[] starttime = temp_real[1].split("\\.", -1);
+					String time1 = starttime[0];
+					String[] temp_real2 = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(" ", -1);
+					String[] tmptime = temp_real2[1].split("\\.", -1);
+					String time2 = tmptime[0];
+					int difh = 0;
+					int difm = 0;
+					int difs = 0;
+					
+					SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+					Date date1;
+					Date date2;
+					try {
+						date1 = format.parse(time1);
+						date2 = format.parse(time2);
+						long difference = date2.getTime() - date1.getTime(); 
+
+						long diffSeconds = difference / 1000 % 60;
+						long diffMinutes = difference / (60 * 1000) % 60;
+						long diffHours = difference / (60 * 60 * 1000) % 24;
+
+						difh = (int)diffHours;
+						difm = (int)diffMinutes;
+						difs = (int)diffSeconds;
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					caltime8 = String.valueOf(difh + ":" + difm + ":" + difs);
+					
 					g.drawLine(x4, 0, x4, this.getHeight());
 					g.drawString("Video End", x4+5, this.getHeight()/4-140);
-					g.drawString(caltime3, x4+5, this.getHeight()/4*2);
+					g.drawString(caltime8, x4+5, this.getHeight()/4*2);
 					String time_temp[] = Data.nor_pupildata.get(count).timestamp.split(":|\\.", -1);
 					String time_text_end = String.valueOf(time_temp[1])+"min "+String.valueOf(time_temp[2])+"sec "+String.valueOf(time_temp[3]);
 					g.drawString(time_text_end, x4+5, this.getHeight()/4-120);
@@ -291,6 +453,7 @@ public class Drawing extends JFrame {
 				
 				g.setColor(Color.BLACK);
 				if(flag == 1) {
+					
 					Data.temp_time_check = String.valueOf(Data.nor_pupildata.get(count).timestamp).split(":|\\.", -1);
 					Data.min = Data.temp_time_check[1];
 					Data.sec = Data.temp_time_check[2];

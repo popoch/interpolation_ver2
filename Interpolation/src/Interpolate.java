@@ -138,16 +138,15 @@ public class Interpolate {
 		frame.getContentPane().add(Window_Size_TextField);
 		Window_Size_TextField.setColumns(10);
 //----------------------------------------------------------------------------------------//	
-		JButton method3 = new JButton("Write_Pic_Gaze");
+		JButton method3 = new JButton("Write_Img_1_Gaze");
 		method3.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					int flag1 = 0;
-					int flag2 = 0;
+					int flag = 0;
 					JFileChooser JFC = new JFileChooser("/Users/Administrator/Desktop");
-					JFC.setSelectedFile(new File("IMG_" + Data.location[5]));
+					JFC.setSelectedFile(new File("IMG_1_" + Data.location[5]));
 					int interval = JFC.showSaveDialog(null);
 					if (interval == JFileChooser.APPROVE_OPTION) {
 						FileWriter fw = new FileWriter(JFC.getSelectedFile() + ".csv");
@@ -160,31 +159,17 @@ public class Interpolate {
 								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_first_image_start_time)) {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
-											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
-											+ "first image start" + "\n");
-									flag1 = 1;
+											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									flag = 1;
 								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_first_image_end_time)) {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
-											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
-											+ "first image end" + "\n");
-									flag1--;
-								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_start_time)) {
-									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
-											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
-											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
-											+ "second image start" + "\n");
-									flag2 = 1;
-								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_end_time)) {
-									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
-											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
-											+ String.valueOf(Data.pupildata.get(count-1).timestamp) + ","
-											+ "second image end" + "\n");
-									flag2--;
-								} else if(flag1 == 1 || flag2 == 1){
+											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									flag--;
+								} else if(flag == 1){
 										fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 												+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
-												+ String.valueOf(Data.pupildata.get(count-1).timestamp) + "\n");
+												+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
 								}
 							}
 						}
@@ -200,20 +185,52 @@ public class Interpolate {
 		method3.setBounds(345, 95, 150, 25);
 		frame.getContentPane().add(method3);
 //----------------------------------------------------------------------------------------//	
-//		JButton method2 = new JButton("Interpolate  >  Window Size  >  Normalize");
-//		method2.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				interpolate();
-//				windowflag = 2;
-//				windowsize();
-//				normalize();
-//			}			
-//		});
-//		
-//		method2.setBounds(15, 255, 315, 25);
-//		frame.getContentPane().add(method2);
+		JButton method2 = new JButton("Write_Img_2_Gaze");
+		method2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int flag = 0;
+					JFileChooser JFC = new JFileChooser("/Users/Administrator/Desktop");
+					JFC.setSelectedFile(new File("IMG_2_" + Data.location[5]));
+					int interval = JFC.showSaveDialog(null);
+					if (interval == JFileChooser.APPROVE_OPTION) {
+						FileWriter fw = new FileWriter(JFC.getSelectedFile() + ".csv");
+						if(Integer.valueOf(Window_Size_TextField.getText()) == 0) {
+							for(int count = 0; count <= Data.pupildata.size(); count++) {
+								if(count == 0) {
+									fw.write("Gaze Data X" + ","
+											+ "Gaze Data Y" + ","
+											+ "Timestamp" + "\n");
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_start_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									flag = 1;
+								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_end_time)) {
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									flag--;
+								} else if(flag == 1){
+										fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+												+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+												+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+								}
+							}
+						}
+						fw.close();
+					}
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}			
+		});
+		
+		method2.setBounds(345, 135, 150, 25);
+		frame.getContentPane().add(method2);
 //----------------------------------------------------------------------------------------//
 //		JButton method1 = new JButton("Window Size  >  Interpolate  >  Normalize");
 //		method1.addActionListener(new ActionListener() {
@@ -286,7 +303,6 @@ public class Interpolate {
 					String tmp9 = String.valueOf(Data.log_image_time.get(2));
 					String[] temps9 = tmp9.split(":", -1);
 					
-					
 					//save original time stamp
 					if(count == 0) {
 						Data.overall_time_start = String.valueOf(temps4[1]);
@@ -308,50 +324,62 @@ public class Interpolate {
 							dif_min = result;
 							Data.log_video_time_start = Data.pupildata.get(count).timestamp;
 						}
-					} else if(dtime[0].equals(log_video_end[0]) == true && dtime[1].equals(log_video_end[1]) == true && dtime[2].equals(log_video_end[2]) == true){
+					}
+					if(dtime[0].equals(log_video_end[0]) == true && dtime[1].equals(log_video_end[1]) == true && dtime[2].equals(log_video_end[2]) == true){
 						
 						int result2 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(log_video_end[3]));
 						if(result2 <= dif_min2) {
 							dif_min2 = result2;
 							Data.log_video_time_end = Data.pupildata.get(count).timestamp;
 						}
-					} else if(dtime[0].equals(log_video_rec_start[0]) == true && dtime[1].equals(log_video_rec_start[1]) == true && dtime[2].equals(log_video_rec_start[2]) == true){
+					}
+					if(dtime[0].equals(log_video_rec_start[0]) == true && dtime[1].equals(log_video_rec_start[1]) == true && dtime[2].equals(log_video_rec_start[2]) == true){
 						
 						int result3 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(log_video_rec_start[3]));
 						if(result3 <= dif_min3) {
 							dif_min3 = result3;
 							Data.ac_log_video_recording_start_time = Data.pupildata.get(count).timestamp;
 						}
-					} else if(dtime[0].equals(log_video_rec_stop[0]) == true && dtime[1].equals(log_video_rec_stop[1]) == true && dtime[2].equals(log_video_rec_stop[2]) == true){
+					}
+					if(dtime[0].equals(log_video_rec_stop[0]) == true && dtime[1].equals(log_video_rec_stop[1]) == true && dtime[2].equals(log_video_rec_stop[2]) == true){
 						
 						int result4 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(log_video_rec_stop[3]));
 						if(result4 <= dif_min4) {
 							dif_min4 = result4;
 							Data.ac_log_video_recording_stop_time = Data.pupildata.get(count).timestamp;
 						}
-					} else if(dtime[0].equals(temps6[0]) == true && dtime[1].equals(temps6[1]) == true && dtime[2].equals(temps6[2]) == true) {
+					}
+					if(dtime[0].equals(temps6[0]) == true && dtime[1].equals(temps6[1]) == true && dtime[2].equals(temps6[2]) == true) {
 						int result5 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps6[3]));
 						if(result5 <= dif_min5) {
 							dif_min5 = result5;
 							Data.log_first_image_start_time = Data.pupildata.get(count).timestamp;
+							System.out.println("Data.log_first_image_start_time "+Data.log_first_image_start_time);
 						}
-					} else if(dtime[0].equals(temps7[0]) == true && dtime[1].equals(temps7[1]) == true && dtime[2].equals(temps7[2]) == true) {
+					}
+					if(dtime[0].equals(temps7[0]) == true && dtime[1].equals(temps7[1]) == true && dtime[2].equals(temps7[2]) == true) {
+
 						int result6 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps7[3]));
 						if(result6 <= dif_min6) {
 							dif_min6 = result6;
 							Data.log_first_image_end_time = Data.pupildata.get(count).timestamp;
+							System.out.println("Data.log_first_image_end_time "+Data.log_first_image_end_time);
 						}
-					} else if(dtime[0].equals(temps8[0]) == true && dtime[1].equals(temps8[1]) == true && dtime[2].equals(temps8[2]) == true) {
+					}
+					if(dtime[0].equals(temps8[0]) == true && dtime[1].equals(temps8[1]) == true && dtime[2].equals(temps8[2]) == true) {
 						int result7 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps8[3]));
 						if(result7 <= dif_min7) {
 							dif_min7 = result7;
 							Data.log_second_image_start_time = Data.pupildata.get(count).timestamp;
+							System.out.println("Data.log_second_image_start_time "+Data.log_second_image_start_time);
 						}
-					} else if(dtime[0].equals(temps9[0]) == true && dtime[1].equals(temps9[1]) == true && dtime[2].equals(temps9[2]) == true) {
+					}
+					if(dtime[0].equals(temps9[0]) == true && dtime[1].equals(temps9[1]) == true && dtime[2].equals(temps9[2]) == true) {
 						int result8 = Math.abs(Integer.valueOf(dtime[3]) - Integer.valueOf(temps9[3]));
 						if(result8 <= dif_min8) {
 							dif_min8 = result8;
 							Data.log_second_image_end_time = Data.pupildata.get(count).timestamp;
+							System.out.println("Data.log_second_image_end_time "+Data.log_second_image_end_time);
 						}
 					}
 				}
