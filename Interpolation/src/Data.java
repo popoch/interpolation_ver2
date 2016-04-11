@@ -20,6 +20,8 @@ public class Data {
 	public static ArrayList<Npupil> normal_inter_data_for_write = new ArrayList<Npupil>();
 	public static ArrayList<String> log_timestamp = new ArrayList<String>();
 	public static ArrayList<String> log_image_time = new ArrayList<String>();
+	public static ArrayList<Pupil> img_1_pupildata = new ArrayList<Pupil>();
+	public static ArrayList<Pupil> img_2_pupildata = new ArrayList<Pupil>();
 	
 	public static String file_name;
 	public static int left_loss;

@@ -32,10 +32,8 @@ public class Drawing3 extends JFrame {
 	}
 	
 	public class DrawingPanel extends JPanel {
-		int flag = 0;
-		int mdraw = 0;
-		int sdraw = 0;
-		int pdraw = 0;
+		
+		
 		protected void paintComponent(Graphics g) {
 
 			Graphics2D g2 = (Graphics2D) g;
@@ -49,10 +47,14 @@ public class Drawing3 extends JFrame {
 			g.drawString("Arbitrary Unit", this.getWidth()-200, this.getHeight()/4 - 240);
 			g.drawString("Name : " + Data.location[5], this.getWidth()-200, this.getHeight()/4 - 228);
 			g.drawString("Gender : " + Data.location[4], this.getWidth()-200, this.getHeight()/4 - 216);
-			g.drawString("Pre X", 20, this.getHeight()/8 + 5);
-			g.drawString("Post X", 20, this.getHeight()/8*3 + 5);
-			g.drawString("Pre Y", 20, this.getHeight()/8*5 + 5);
-			g.drawString("Post Y", 20, this.getHeight()/8*7 + 5);
+			g.drawString("Pre", 20, this.getHeight()/8 + 5);
+			g.drawString("Left", 20, this.getHeight()/8 + 15);
+			g.drawString("Post", 20, this.getHeight()/8*3 + 5);
+			g.drawString("Left", 20, this.getHeight()/8*3 + 15);
+			g.drawString("Pre", 20, this.getHeight()/8*5 + 5);
+			g.drawString("Right", 20, this.getHeight()/8*5 + 15);
+			g.drawString("Post", 20, this.getHeight()/8*7 + 5);
+			g.drawString("Right", 20, this.getHeight()/8*7 + 15);
 			g.drawLine(0, this.getHeight()/4*2, this.getWidth(), this.getHeight()/4*2);
 			
 			//mid lane
@@ -69,21 +71,74 @@ public class Drawing3 extends JFrame {
 			g.drawLine(80, this.getHeight()/8*7, this.getWidth(), this.getHeight()/8*7);
 			
 			g.setColor(Color.LIGHT_GRAY);
-			for(int i = -10; i <= 10; i++) {
+			for(int i = -3; i <= 3; i++) {
 				if(i == 0) {
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8 + 5);
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8*3 + 5);
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8*5 + 5);
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8*7 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*3 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*5 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*7 + 5);
 				} else {
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8 - i*12 + 5);
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8*3 - i*12 + 5);
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8*5 - i*12 + 5);
-					g.drawString(String.valueOf(i), 60, this.getHeight()/8*7 - i*12 + 5);
-					g.drawLine(80, this.getHeight()/8 - i*12, this.getWidth(), this.getHeight()/8 - i*12);
-					g.drawLine(80, this.getHeight()/8*3 - i*12, this.getWidth(), this.getHeight()/8*3 - i*12);
-					g.drawLine(80, this.getHeight()/8*5 - i*12, this.getWidth(), this.getHeight()/8*5 - i*12);
-					g.drawLine(80, this.getHeight()/8*7 - i*12, this.getWidth(), this.getHeight()/8*7 - i*12);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8 - i*40 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*3 - i*40 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*5 - i*40 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*7 - i*40 + 5);
+					g.drawLine(80, this.getHeight()/8 - i*40, this.getWidth(), this.getHeight()/8 - i*40);
+					g.drawLine(80, this.getHeight()/8*3 - i*40, this.getWidth(), this.getHeight()/8*3 - i*40);
+					g.drawLine(80, this.getHeight()/8*5 - i*40, this.getWidth(), this.getHeight()/8*5 - i*40);
+					g.drawLine(80, this.getHeight()/8*7 - i*40, this.getWidth(), this.getHeight()/8*7 - i*40);
+				}
+			}
+			
+			for(int count = 1; count < Data.img_1_pupildata.size(); count++) {
+				
+					int x1 = Math.round((float)(count - 1) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
+					float y1 = this.getHeight()/8 - (Float.valueOf(Data.img_1_pupildata.get(count-1).left))*40;
+					
+					int x2 = Math.round(((float)count) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
+					float y2 = this.getHeight()/8 - (Float.valueOf(Data.img_1_pupildata.get(count).left))*40;
+					
+					g.setColor(Color.BLUE);
+					g2.draw(new Line2D.Float(x1, y1, x2, y2));
+					
+					int x3 = Math.round((float)(count - 1) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
+					float y3 = this.getHeight()/8*5 - (Float.valueOf(Data.img_1_pupildata.get(count-1).right))*40;
+					
+					int x4 = Math.round(((float)count) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
+					float y4 = this.getHeight()/8*5 - (Float.valueOf(Data.img_1_pupildata.get(count).right))*40;
+					
+					g.setColor(Color.BLUE);
+					g2.draw(new Line2D.Float(x3, y3, x4, y4));
+					
+					if(count == Data.img_1_pupildata.size()-1) {
+						g.setColor(Color.BLACK);
+						g.drawLine(x4, 0, x4, this.getHeight()/4);
+						g.drawLine(x4, this.getHeight()/4*2, x4, this.getHeight()/4*3);
+					}
+			}
+			
+			for(int count = 1; count < Data.img_2_pupildata.size(); count++) {
+				int x5 = Math.round((float)(count - 1) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
+				float y5 = this.getHeight()/8*3 - (Float.valueOf(Data.img_2_pupildata.get(count-1).left))*40;
+				
+				int x6 = Math.round(((float)count) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
+				float y6 = this.getHeight()/8*3 - (Float.valueOf(Data.img_2_pupildata.get(count).left))*40;
+				
+				g.setColor(Color.BLUE);
+				g2.draw(new Line2D.Float(x5, y5, x6, y6));
+				
+				int x7 = Math.round((float)(count - 1) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
+				float y7 = this.getHeight()/8*7 - (Float.valueOf(Data.img_2_pupildata.get(count-1).right))*40;
+				
+				int x8 = Math.round(((float)count) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
+				float y8 = this.getHeight()/8*7 - (Float.valueOf(Data.img_2_pupildata.get(count).right))*40;
+				
+				g.setColor(Color.BLUE);
+				g2.draw(new Line2D.Float(x7, y7, x8, y8));
+				
+				if(count == Data.img_2_pupildata.size()-1) {
+					g.setColor(Color.BLACK);
+					g.drawLine(x8, this.getHeight()/4, x8, this.getHeight()/4*2);
+					g.drawLine(x8, this.getHeight()/4*3, x8, this.getHeight()/4*4);
 				}
 			}
 		}

@@ -160,16 +160,36 @@ public class Interpolate {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									
+									Pupil p = new Pupil();
+									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+									p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+									Data.img_1_pupildata.add(p);
+									
 									flag = 1;
 								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_first_image_end_time)) {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									
+									Pupil p = new Pupil();
+									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+									p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+									Data.img_1_pupildata.add(p);
+									
 									flag--;
 								} else if(flag == 1){
 										fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 												+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 												+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+										
+										Pupil p = new Pupil();
+										p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+										p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+										p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+										Data.img_1_pupildata.add(p);
 								}
 							}
 						}
@@ -207,16 +227,36 @@ public class Interpolate {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									
+									Pupil p = new Pupil();
+									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+									p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+									Data.img_2_pupildata.add(p);
+									
 									flag = 1;
 								} else if(Data.pupildata.get(count-1).timestamp.equalsIgnoreCase(Data.log_second_image_end_time)) {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									
+									Pupil p = new Pupil();
+									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+									p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+									Data.img_2_pupildata.add(p);
+									
 									flag--;
 								} else if(flag == 1){
 										fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 												+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 												+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+										
+										Pupil p = new Pupil();
+										p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+										p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+										p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+										Data.img_2_pupildata.add(p);
 								}
 							}
 						}
