@@ -354,7 +354,7 @@ public class Interpolate {
 						if(result5 <= dif_min5) {
 							dif_min5 = result5;
 							Data.log_first_image_start_time = Data.pupildata.get(count).timestamp;
-							System.out.println("Data.log_first_image_start_time "+Data.log_first_image_start_time);
+							//System.out.println("Data.log_first_image_start_time "+Data.log_first_image_start_time);
 						}
 					}
 					if(dtime[0].equals(temps7[0]) == true && dtime[1].equals(temps7[1]) == true && dtime[2].equals(temps7[2]) == true) {
@@ -363,7 +363,7 @@ public class Interpolate {
 						if(result6 <= dif_min6) {
 							dif_min6 = result6;
 							Data.log_first_image_end_time = Data.pupildata.get(count).timestamp;
-							System.out.println("Data.log_first_image_end_time "+Data.log_first_image_end_time);
+							//System.out.println("Data.log_first_image_end_time "+Data.log_first_image_end_time);
 						}
 					}
 					if(dtime[0].equals(temps8[0]) == true && dtime[1].equals(temps8[1]) == true && dtime[2].equals(temps8[2]) == true) {
@@ -371,7 +371,7 @@ public class Interpolate {
 						if(result7 <= dif_min7) {
 							dif_min7 = result7;
 							Data.log_second_image_start_time = Data.pupildata.get(count).timestamp;
-							System.out.println("Data.log_second_image_start_time "+Data.log_second_image_start_time);
+							//System.out.println("Data.log_second_image_start_time "+Data.log_second_image_start_time);
 						}
 					}
 					if(dtime[0].equals(temps9[0]) == true && dtime[1].equals(temps9[1]) == true && dtime[2].equals(temps9[2]) == true) {
@@ -379,7 +379,7 @@ public class Interpolate {
 						if(result8 <= dif_min8) {
 							dif_min8 = result8;
 							Data.log_second_image_end_time = Data.pupildata.get(count).timestamp;
-							System.out.println("Data.log_second_image_end_time "+Data.log_second_image_end_time);
+							//System.out.println("Data.log_second_image_end_time "+Data.log_second_image_end_time);
 						}
 					}
 				}
