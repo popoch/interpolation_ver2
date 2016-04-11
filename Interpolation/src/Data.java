@@ -61,6 +61,7 @@ public class Data {
 	
 	public static Drawing DF = new Drawing();
 	public static Drawing2 DF2 = new Drawing2();
+	public static Drawing3 DF3 = new Drawing3();
 	
 	public static String[] location;
 	public static String[] time_check;

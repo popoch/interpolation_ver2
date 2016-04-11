@@ -232,20 +232,20 @@ public class Interpolate {
 		method2.setBounds(345, 135, 150, 25);
 		frame.getContentPane().add(method2);
 //----------------------------------------------------------------------------------------//
-//		JButton method1 = new JButton("Window Size  >  Interpolate  >  Normalize");
-//		method1.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				windowflag = 1;
-//				windowsize();
-//				interpolate();
-//				normalize();
-//			}			
-//		});
-//		
-//		method1.setBounds(15, 295, 315, 25);
-//		frame.getContentPane().add(method1);
+		JButton method1 = new JButton("Image Graph");
+		method1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Data.currentPoint2 = 0;
+				Data.DF3.Input_data(Data.currentPoint2);
+				Data.DF3.repaint();
+				Data.DF3.setVisible(true);
+			}			
+		});
+		
+		method1.setBounds(345, 175, 150, 25);
+		frame.getContentPane().add(method1);
 //----------------------------------------------------------------------------------------//
 		JButton graph_w = new JButton("Window Graph");
 		graph_w.addActionListener(new ActionListener() {
