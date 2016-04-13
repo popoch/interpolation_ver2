@@ -71,40 +71,40 @@ public class Drawing3 extends JFrame {
 			g.drawLine(80, this.getHeight()/8*7, this.getWidth(), this.getHeight()/8*7);
 			
 			g.setColor(Color.LIGHT_GRAY);
-			for(int i = -3; i <= 3; i++) {
+			for(int i = -5; i <= 5; i++) {
 				if(i == 0) {
 					g.drawString(String.valueOf(i), 65, this.getHeight()/8 + 5);
 					g.drawString(String.valueOf(i), 65, this.getHeight()/8*3 + 5);
 					g.drawString(String.valueOf(i), 65, this.getHeight()/8*5 + 5);
 					g.drawString(String.valueOf(i), 65, this.getHeight()/8*7 + 5);
 				} else {
-					g.drawString(String.valueOf(i), 65, this.getHeight()/8 - i*40 + 5);
-					g.drawString(String.valueOf(i), 65, this.getHeight()/8*3 - i*40 + 5);
-					g.drawString(String.valueOf(i), 65, this.getHeight()/8*5 - i*40 + 5);
-					g.drawString(String.valueOf(i), 65, this.getHeight()/8*7 - i*40 + 5);
-					g.drawLine(80, this.getHeight()/8 - i*40, this.getWidth(), this.getHeight()/8 - i*40);
-					g.drawLine(80, this.getHeight()/8*3 - i*40, this.getWidth(), this.getHeight()/8*3 - i*40);
-					g.drawLine(80, this.getHeight()/8*5 - i*40, this.getWidth(), this.getHeight()/8*5 - i*40);
-					g.drawLine(80, this.getHeight()/8*7 - i*40, this.getWidth(), this.getHeight()/8*7 - i*40);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8 - i*20 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*3 - i*20 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*5 - i*20 + 5);
+					g.drawString(String.valueOf(i), 65, this.getHeight()/8*7 - i*20 + 5);
+					g.drawLine(80, this.getHeight()/8 - i*20, this.getWidth(), this.getHeight()/8 - i*20);
+					g.drawLine(80, this.getHeight()/8*3 - i*20, this.getWidth(), this.getHeight()/8*3 - i*20);
+					g.drawLine(80, this.getHeight()/8*5 - i*20, this.getWidth(), this.getHeight()/8*5 - i*20);
+					g.drawLine(80, this.getHeight()/8*7 - i*20, this.getWidth(), this.getHeight()/8*7 - i*20);
 				}
 			}
 			
 			for(int count = 1; count < Data.img_1_pupildata.size(); count++) {
 				
 					int x1 = Math.round((float)(count - 1) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
-					float y1 = this.getHeight()/8 - (Float.valueOf(Data.img_1_pupildata.get(count-1).left))*40;
+					float y1 = this.getHeight()/8 - (Float.valueOf(Data.img_1_pupildata.get(count-1).left))*20;
 					
 					int x2 = Math.round(((float)count) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
-					float y2 = this.getHeight()/8 - (Float.valueOf(Data.img_1_pupildata.get(count).left))*40;
+					float y2 = this.getHeight()/8 - (Float.valueOf(Data.img_1_pupildata.get(count).left))*20;
 					
 					g.setColor(Color.BLUE);
 					g2.draw(new Line2D.Float(x1, y1, x2, y2));
 					
 					int x3 = Math.round((float)(count - 1) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
-					float y3 = this.getHeight()/8*5 - (Float.valueOf(Data.img_1_pupildata.get(count-1).right))*40;
+					float y3 = this.getHeight()/8*5 - (Float.valueOf(Data.img_1_pupildata.get(count-1).right))*20;
 					
 					int x4 = Math.round(((float)count) * 1810 /((float) Data.img_1_pupildata.size()) + 80);
-					float y4 = this.getHeight()/8*5 - (Float.valueOf(Data.img_1_pupildata.get(count).right))*40;
+					float y4 = this.getHeight()/8*5 - (Float.valueOf(Data.img_1_pupildata.get(count).right))*20;
 					
 					g.setColor(Color.BLUE);
 					g2.draw(new Line2D.Float(x3, y3, x4, y4));
@@ -118,19 +118,19 @@ public class Drawing3 extends JFrame {
 			
 			for(int count = 1; count < Data.img_2_pupildata.size(); count++) {
 				int x5 = Math.round((float)(count - 1) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
-				float y5 = this.getHeight()/8*3 - (Float.valueOf(Data.img_2_pupildata.get(count-1).left))*40;
+				float y5 = this.getHeight()/8*3 - (Float.valueOf(Data.img_2_pupildata.get(count-1).left))*20;
 				
 				int x6 = Math.round(((float)count) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
-				float y6 = this.getHeight()/8*3 - (Float.valueOf(Data.img_2_pupildata.get(count).left))*40;
+				float y6 = this.getHeight()/8*3 - (Float.valueOf(Data.img_2_pupildata.get(count).left))*20;
 				
 				g.setColor(Color.BLUE);
 				g2.draw(new Line2D.Float(x5, y5, x6, y6));
 				
 				int x7 = Math.round((float)(count - 1) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
-				float y7 = this.getHeight()/8*7 - (Float.valueOf(Data.img_2_pupildata.get(count-1).right))*40;
+				float y7 = this.getHeight()/8*7 - (Float.valueOf(Data.img_2_pupildata.get(count-1).right))*20;
 				
 				int x8 = Math.round(((float)count) * 1810 /((float) Data.img_2_pupildata.size()) + 80);
-				float y8 = this.getHeight()/8*7 - (Float.valueOf(Data.img_2_pupildata.get(count).right))*40;
+				float y8 = this.getHeight()/8*7 - (Float.valueOf(Data.img_2_pupildata.get(count).right))*20;
 				
 				g.setColor(Color.BLUE);
 				g2.draw(new Line2D.Float(x7, y7, x8, y8));
