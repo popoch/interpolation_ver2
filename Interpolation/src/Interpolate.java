@@ -143,6 +143,10 @@ public class Interpolate {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				int img1_all_count = 0;
+				int img1_left_count = 0;
+				int img1_right_count = 0;
+				
 				try {
 					int flag = 0;
 					JFileChooser JFC = new JFileChooser("/Users/Administrator/Desktop");
@@ -160,7 +164,14 @@ public class Interpolate {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									img1_all_count++;
 									
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).left) == 0) {
+										img1_left_count++;
+									}
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).right) == 0) {
+										img1_right_count++;
+									}
 									Pupil p = new Pupil();
 									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
 									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
@@ -172,7 +183,14 @@ public class Interpolate {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									img1_all_count++;
 									
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).left) == 0) {
+										img1_left_count++;
+									}
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).right) == 0) {
+										img1_right_count++;
+									}
 									Pupil p = new Pupil();
 									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
 									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
@@ -181,24 +199,32 @@ public class Interpolate {
 									
 									flag--;
 								} else if(flag == 1){
-										fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
-												+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
-												+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
-										
-										Pupil p = new Pupil();
-										p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
-										p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
-										p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
-										Data.img_1_pupildata.add(p);
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									img1_all_count++;
+									
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).left) == 0) {
+										img1_left_count++;
+									}
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).right) == 0) {
+										img1_right_count++;
+									}
+									Pupil p = new Pupil();
+									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+									p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+									Data.img_1_pupildata.add(p);
 								}
 							}
 						}
 						fw.close();
 					}
-					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				Data.left_img_1_mean = ((float)img1_left_count/(float)img1_all_count)*100;
+				Data.right_img_1_mean = ((float)img1_right_count/(float)img1_all_count)*100;
 			}			
 		});
 		
@@ -210,6 +236,10 @@ public class Interpolate {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				int img2_all_count = 0;
+				int img2_left_count = 0;
+				int img2_right_count = 0;
+				
 				try {
 					int flag = 0;
 					JFileChooser JFC = new JFileChooser("/Users/Administrator/Desktop");
@@ -227,7 +257,14 @@ public class Interpolate {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									img2_all_count++;
 									
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).left) == 0) {
+										img2_left_count++;
+									}
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).right) == 0) {
+										img2_right_count++;
+									}
 									Pupil p = new Pupil();
 									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
 									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
@@ -239,7 +276,14 @@ public class Interpolate {
 									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
 											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									img2_all_count++;
 									
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).left) == 0) {
+										img2_left_count++;
+									}
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).right) == 0) {
+										img2_right_count++;
+									}
 									Pupil p = new Pupil();
 									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
 									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
@@ -248,24 +292,32 @@ public class Interpolate {
 									
 									flag--;
 								} else if(flag == 1){
-										fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
-												+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
-												+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
-										
-										Pupil p = new Pupil();
-										p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
-										p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
-										p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
-										Data.img_2_pupildata.add(p);
+									fw.write(String.valueOf(Data.pupildata.get(count-1).avgX) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).avgY) + ","
+											+ String.valueOf(Data.pupildata.get(count-1).time) + "\n");
+									img2_all_count++;
+									
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).left) == 0) {
+										img2_left_count++;
+									}
+									if(Float.valueOf(Data.pupildata_temp.get(count-1).right) == 0) {
+										img2_right_count++;
+									}
+									Pupil p = new Pupil();
+									p.left = Float.valueOf(Data.nor_pupildata.get(count-1).left);
+									p.right = Float.valueOf(Data.nor_pupildata.get(count-1).right);
+									p.timestamp = String.valueOf(Data.nor_pupildata.get(count-1).timestamp);
+									Data.img_2_pupildata.add(p);
 								}
 							}
 						}
 						fw.close();
 					}
-					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				Data.left_img_2_mean = ((float)img2_left_count/(float)img2_all_count)*100;
+				Data.right_img_2_mean = ((float)img2_right_count/(float)img2_all_count)*100;
 			}			
 		});
 		
@@ -840,6 +892,9 @@ public class Interpolate {
 							pt.left = Float.valueOf(temps[12]);
 							pt.right = Float.valueOf(temps[19]);
 							pt.timestamp = temps[24];
+							pt.avgX = Float.valueOf(temps[3]);
+							pt.avgY = Float.valueOf(temps[4]);
+							pt.time = Long.valueOf(temps[23]);
 							Data.pupildata_temp.add(pt);
 							
 							if(Float.valueOf(temps[12]) == 0) {

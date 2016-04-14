@@ -33,7 +33,6 @@ public class Drawing3 extends JFrame {
 	
 	public class DrawingPanel extends JPanel {
 		
-		
 		protected void paintComponent(Graphics g) {
 
 			Graphics2D g2 = (Graphics2D) g;
@@ -42,11 +41,13 @@ public class Drawing3 extends JFrame {
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			
 			g.setColor(Color.BLACK);
-			g.drawString("Source File 1 : " + Data.location[5] + "_" + Data.file_name, 50, this.getHeight()-30);
-			g.drawString("Source File 2 : " + Data.location[5] + "_" + "systemlog.csv", 50, this.getHeight()-15);
+			g.drawString("Source File 1 : " + Data.location[5] + "_" + Data.file_name, 80, this.getHeight()-40);
+			g.drawString("Source File 2 : " + Data.location[5] + "_" + "systemlog.csv", 80, this.getHeight()-20);
 			g.drawString("Arbitrary Unit", this.getWidth()-200, this.getHeight()/4 - 240);
-			g.drawString("Name : " + Data.location[5], this.getWidth()-200, this.getHeight()/4 - 228);
-			g.drawString("Gender : " + Data.location[4], this.getWidth()-200, this.getHeight()/4 - 216);
+			g.drawString("Name : " + Data.location[5], this.getWidth()-200, this.getHeight()/4 - 220);
+			g.drawString("Gender : " + Data.location[4], this.getWidth()-200, this.getHeight()/4 - 200);
+			g.drawString("Left loss of image 1 (Pre) vs image 2 (Post) " + Data.left_img_1_mean + "% vs " + Data.left_img_2_mean +"%", 80, this.getHeight()/4 - 240);
+			g.drawString("Right loss of image 1 (Pre) vs image 2 (Post) " + Data.right_img_1_mean + "% vs " + Data.right_img_2_mean +"%", 80, this.getHeight()/4*3 - 240);
 			g.drawString("Pre", 20, this.getHeight()/8 + 5);
 			g.drawString("Left", 20, this.getHeight()/8 + 15);
 			g.drawString("Post", 20, this.getHeight()/8*3 + 5);

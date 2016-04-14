@@ -34,6 +34,10 @@ public class Data {
 	
 	public static float left_nor_data_mean;
 	public static float right_nor_data_mean;
+	public static float left_img_1_mean;
+	public static float right_img_1_mean;
+	public static float left_img_2_mean;
+	public static float right_img_2_mean;
 	
 	public static int window_size;
 	public static float window_pupil_mean_left;
